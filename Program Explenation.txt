@@ -1,0 +1,15 @@
+Mechanical push buttons generate a noisy signal when pressed or released, a problem known as
+bouncing. Without filtering, the microcontroller may interpret a single press as multiple inputs. To
+solve this, the program implements debouncing using a counter method instead of a simple delay.
+In this approach, the program samples the button input periodically (every 1 ms). A counter
+variable is used to verify signal stability:
+• If the button state remains the same across several consecutive samples (for example, 5 ms),
+the counter is incremented.
+• If the counter reaches the defined threshold, the new state is confirmed as valid.
+• If the state changes before the threshold is reached, the counter is reset.
+This ensures that only stable transitions are accepted as real button presses or releases. In the
+program, when a stable press is detected, the LED state is toggled (ON ↔ OFF). The LED
+remains in that state until the next valid press.
+This counter-based method is more efficient than a fixed delay because the microcontroller does
+not waste time waiting in blocking functions. Instead, it continuously checks the input and
+responds quickly while still filtering out bouncing noise.
